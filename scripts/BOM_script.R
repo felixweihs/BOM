@@ -9,10 +9,11 @@ separated_min_max <- separate(BOM_data, col = Temp_min_max, into = c('min', 'max
 only_data <- separated_min_max %>% 
   filter(min != '-') %>% #Filter out min rows without value
   filter(max != '-') %>% #Filter out max rows without value
-  filter(Rainfall != '0') %>% #Filter out rainfall
+  filter(Rainfall != '-') %>% #Filter out rainfall
   group_by(Station_number) %>% #Group by Station numbers
   summarise(n = n()) #Count number of rows which indicate the number of days for each station
 write_csv(only_data, "results/question1.csv") #Output result into csv file in the results folder
+only_data
 
 #Question 2 -
 #Which month saw the lowest average daily temperature difference?
