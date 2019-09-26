@@ -51,7 +51,7 @@ BOM_stations_tidy <- BOM_stations %>%
 separated_min_max <- separate(BOM_data, col = Temp_min_max, into = c('min', 'max'), sep = "/") #Separate temperatures into min and max
 avrg_temp_diff_station <- separated_min_max %>% 
   mutate(temp_diff = as.numeric(max) - as.numeric(min)) %>% #Calculate temperature difference
-  filter(temp_diff != 'NA') %>% #Filter out rows without 
+  filter(temp_diff != 'NA') %>% #Filter out rows without a valid temperature difference output
   group_by(Station_number) %>% #Group by Station numbers
   summarise(avrg_temp_diff = mean(temp_diff)) %>% #Calculate average temperature difference
   rename(info = Station_number) #Rename Station_number for following joining function
